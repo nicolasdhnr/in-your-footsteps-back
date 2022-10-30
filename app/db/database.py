@@ -7,7 +7,7 @@ import os
 import pandas as pd
 
 
-engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:inyourfootsteps@35.246.2.66')
+# engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:inyourfootsteps@35.246.2.66')
 
 def send_to_db(table, json_file):
     data = json.load(json_file)
