@@ -9,4 +9,5 @@ pymysql
 pandas
 mysql
 mysql-connector-python
+pandas
 
