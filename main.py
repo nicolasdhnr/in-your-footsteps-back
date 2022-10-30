@@ -10,18 +10,18 @@ app = FastAPI()
 
 
 @app.get("/")
-async def read_root():
+def read_root():
     return {"Hello": "World"}
 
 @app.get("/handshake/")
-async def handshake():
+def handshake():
     pass
 
 
 
 # sign up
 @app.post("/signup/")
-async def signup(user: UserIn):
+def signup(user: UserIn):
     return user
 
 
@@ -42,6 +42,4 @@ def create_path(path: PathIn):
 #testing firestore connection
 @app.get("/firestore/")
 def get_path_data():
-
-
-
+    pass
