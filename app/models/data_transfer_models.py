@@ -21,7 +21,7 @@ class UserIn(BaseModel):
 class StoryOut(BaseModel):
     """ Defines the model for a story. """
     story_id: int
-    user_id: int
+    user_id: int # user who posted it
     start_latitude: float  # used to show starting point on map
     start_longitude: float
 
@@ -33,9 +33,12 @@ class StoryRecomendation(BaseModel):
 
 class StoryIn(BaseModel):
     """ New Story registration. """
-    storyID: str
-    start_latitude: float
-    start_longitude: float
+    story_id: str
+    startlat: float
+    startlng: float
+    story_user_id: int # id of the user who just created the ting
+    title : str
+    description : str
 
 
 # todo: Maybe we don't need to send the UID every time? - start flag then assumes same story uid unless otherwise specified.
@@ -43,7 +46,7 @@ class StoryIn(BaseModel):
 class HandshakeOut(BaseModel):
     """ Defines the model for the initial exchange of information. """
     # NOTE: Handshake should be called every time the UI is refreshed."
-    stories: List[Union[StoryIn, None]]
+    stories: List[Union[Story, None]]
 
     class Config:
         orm_mode = True

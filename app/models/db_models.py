@@ -29,11 +29,11 @@ class Story(BaseModel):
     theme: str
     startlat: float  # used to show starting point on map
     startlng: float
-    themes: List[str]  # 5 themes per story  #TODO: Make function that gets all themes for a story_id
+    # themes: List[str]  # 5 themes per story  #TODO: Make function that gets all themes for a story_id
     endlat: Optional[float] = None  # used to show starting point on map
     endlng: Optional[float] = None
     description: Optional[str] = None
-
+    distance: Optional[float] = None
     class Config:
         orm_mode = True
 

@@ -6,6 +6,7 @@ requests
 pytest
 firebase-admin
 pymysql
-
-
+pandas
+mysql
+mysql-connector-python
 

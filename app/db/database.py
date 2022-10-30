@@ -4,6 +4,8 @@ from sqlalchemy import insert
 import json
 from datetime import date
 import os
+import pandas as pd
+
 
 engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:inyourfootsteps@35.246.2.66')
 
@@ -36,3 +38,4 @@ def insert_path(data):
 
 def insert_voice(data):
     return f"INSERT INTO footsteps_data.voice(voice_id, story_id, order, text, start, end) VALUES ({str(data[0])}, {str(data[1])}, {str(data[2])}, '{data[3]}', {str(data[4])}, {str(data[5])})"
+
