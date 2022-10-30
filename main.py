@@ -6,8 +6,21 @@ import asyncio
 from app.models.db_models import User, Story, Path, Voice
 from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn, HandshakeIn, HandshakeOut
 from app.db.manipulation import data_to_db
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 app = FastAPI()
 
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():

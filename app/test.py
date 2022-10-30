@@ -10,6 +10,10 @@ from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn
 
 heroku_url = "https://in-your-footsteps.herokuapp.com/"
 
+def test_handshake():
+    pass
+
+
 
 def test_signin():
     url = heroku_url + "login/"
