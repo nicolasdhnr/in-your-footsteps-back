@@ -10,5 +10,5 @@ pandas
 mysql
 mysql-connector-python
 pandas
-
+tabulate
 
