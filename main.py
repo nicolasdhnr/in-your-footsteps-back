@@ -29,68 +29,68 @@ app.add_middleware(
 async def read_root():
     return {"Hello": "World"}
 
-
-@app.get("/handshake/")
-async def handshake(handshake: HandshakeIn) -> dict:
-    # get handshake data from db
-    # return handshake data
-    handshake_out = get_nearest(handshake.latitude, handshake.longitude)
-    return handshake_out.dict()
-
-
-# User wants to like a story.
-@app.post("/like/")
-async def like(story_id: int) -> dict:
-    # increment story ranking in db based
-    upvote(story_id)
-    return {f"Story {story_id}": "liked"}
-
-
-@app.post("/unlike/")
-async def unlike(story_id: int) -> dict:
-    # decrement story ranking in db based
-    downvote(story_id)
-    return {f"Story {story_id}": "unliked"}
-
-
-# User finishes recording a story
-@app.post("/log_path/")
-async def log_story(story: StoryIn):
-    """
-    Register a new story.
-    """
-    # log path to db
-    # write data to db
-    insert_new_story(story)
-    return {f"path {story.storyID}": "logged"}
-
-
-# User presses the confirm story button and starts following a path
-@app.post("/confirm_story/")
-async def confirm_story(story: StoryStartIn) -> dict:
-    """
-    Register a new story.
-    :param path:
-    :return:
-    """
-    # receive the story id
-    # get every recordg associated with the story id in the database
-    # return the recordings to the front end
-
-    return recordings_per_story(story.story_id)
-
-@app.get("/seach/")
-async def search(title: str) -> List[Story]:
-    # search db by title
-    # return list of stories
-
-    return search_by_title(title).json()
-
-
-@app.get("/filter/{theme}")
-async def filter(theme: str) -> List[Story]:
-    # search db by theme
-    # return list of stories
-    return search_by_theme(theme).json()
-
+#
+# @app.get("/handshake/")
+# async def handshake() -> dict:
+#     # get handshake data from db
+#     # return handshake data
+#     handshake_out = get_nearest(1.1, 1.1)
+#     return handshake_out.dict()
+#
+#
+# # User wants to like a story.
+# @app.post("/like/")
+# async def like(story_id: int) -> dict:
+#     # increment story ranking in db based
+#     upvote(story_id)
+#     return {f"Story {story_id}": "liked"}
+#
+#
+# @app.post("/unlike/")
+# async def unlike(story_id: int) -> dict:
+#     # decrement story ranking in db based
+#     downvote(story_id)
+#     return {f"Story {story_id}": "unliked"}
+#
+#
+# # User finishes recording a story
+# @app.post("/log_path/")
+# async def log_story(story: StoryIn):
+#     """
+#     Register a new story.
+#     """
+#     # log path to db
+#     # write data to db
+#     insert_new_story(story)
+#     return {f"path {story.storyID}": "logged"}
+#
+#
+# # User presses the confirm story button and starts following a path
+# @app.post("/confirm_story/")
+# async def confirm_story(story: StoryStartIn) -> dict:
+#     """
+#     Register a new story.
+#     :param path:
+#     :return:
+#     """
+#     # receive the story id
+#     # get every recordg associated with the story id in the database
+#     # return the recordings to the front end
+#
+#     return recordings_per_story(story.story_id)
+#
+# @app.get("/seach/")
+# async def search(title: str) -> List[Story]:
+#     # search db by title
+#     # return list of stories
+#
+#     return search_by_title(title).json()
+#
+#
+# @app.get("/filter/{theme}")
+# async def filter(theme: str) -> List[Story]:
+#     # search db by theme
+#     # return list of stories
+#     return search_by_theme(theme).json()
+#
 

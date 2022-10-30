@@ -92,6 +92,3 @@ def insert_new_story(story: StoryIn):
     engine.execute(query)
 
 
-if __name__ == "__main__":
-    print(get_nearest(1.1, 1.1))
-

@@ -6,14 +6,19 @@ Test heroku api endpoints.
 import requests
 import json
 import pytest
-from app.models.data_transfer_models import UserIn, StoryIn, StoryIn
+from app.models.data_transfer_models import UserIn, StoryIn, StoryIn, HandshakeIn
 
 heroku_url = "https://in-your-footsteps.herokuapp.com/"
 
 
 def test_handshake():
-    pass
+    handshake = HandshakeIn(latitude=51.5074, longitude=0.1278)
+    response = requests.post(heroku_url + "handshake/", json=handshake.dict())
+    assert response.status_code == 200
+    print(response.json())
 
+
+test_handshake()
 
 def test_signin():
     url = heroku_url + "login/"
