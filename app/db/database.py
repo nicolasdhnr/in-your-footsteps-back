@@ -4,6 +4,7 @@ from sqlalchemy import insert
 import json
 from datetime import date
 
+
 class data_to_db():
     def __init__(self):
         self.establish_connection
@@ -11,7 +12,7 @@ class data_to_db():
     def establish_connection():
         engine = sqlalchemy.create_engine('mysql+pymysql://root:inyourfootsteps@35.246.2.66')
 
-    def send_to_db(self,table, json_file):
+    def send_to_db(self, table, json_file):
         data = json.load(json_file)
         for i in data:
             values = list(i.values())
@@ -26,20 +27,21 @@ class data_to_db():
             elif table == 'voice':
                 engine.execute(self.insert_voice(values))
 
-    def insert_auth(self,data):
+    def insert_auth(self, data):
         return f"INSERT INTO footsteps_db.authentication (userUID, identifier, provider, created, signed_in) VALUES({str(data[0])}, '{data[1]}', '{data[2]}', {str(data[3])}, {str(data[4])})"
 
-    def insert_profile(self,data):
+    def insert_profile(self, data):
         return f"INSERT INTO footsteps_db.profile (user_id, userUID, username) VALUES ({str(data[0])}, {str(data[1])}, {data[2]})"
 
-    def insert_story(self,data):
+    def insert_story(self, data):
         return f"INSERT INTO footsteps_db.story (story_id, user_id, title, ranking, theme) VALUES ({data})"
 
-    def insert_path(self,data):
+    def insert_path(self, data):
         return f"INSERT INTO footsteps_data.path (path_id, story_id, latitude, longitude, timestamp) VALUES ({data})"
 
-    def insert_voice(self,data):
+    def insert_voice(self, data):
         return f"INSERT INTO footsteps_data.voice(voice_id, story_id, order, text, start, end) VALUES ({data})"
+
 
 db = data_to_db()
 with open('prod.json') as json_file:
