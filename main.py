@@ -94,9 +94,3 @@ async def filter(theme: str) -> List[Story]:
     return search_by_theme(theme).json()
 
 
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="localhost", port=8000)
-
-
