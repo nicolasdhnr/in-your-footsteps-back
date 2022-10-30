@@ -94,10 +94,4 @@ def insert_new_story(story: StoryIn):
 
 if __name__ == "__main__":
     print(get_nearest(1.1, 1.1))
-    print(search_by_title('test'))
-    print(search_by_theme('test'))
-    print(recordings_per_story(1))
-    print(insert_new_story(StoryIn(story_id=1, story_user_id=1, title='test', startlat=1.1, startlng=1.1, description='test')))
-    print(upvote(1))
-    print(downvote(1))
 
