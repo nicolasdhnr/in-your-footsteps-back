@@ -8,8 +8,8 @@ import pandas as pd
 from app.models.data_transfer_models import Story
 from app.models.data_transfer_models import HandshakeOut, HandshakeIn, StoryIn, StoryOut, Recording, StoryStartOut
 
-engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:inyourfootsteps@35.246.2.66')
-conn = engine.connect()
+# engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:inyourfootsteps@35.246.2.66')
+# conn = engine.connect()
 
 
 def get_nearest(lat, lng):
