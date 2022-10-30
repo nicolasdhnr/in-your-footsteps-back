@@ -4,7 +4,7 @@ Defines all relevant API endpoints.
 from fastapi import FastAPI
 import asyncio
 from app.models.db_models import User, Story, Path, Voice
-from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn
+from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn, HandshakeIn, HandshakeOut
 from app.db.manipulation import data_to_db
 app = FastAPI()
 
@@ -13,9 +13,11 @@ app = FastAPI()
 def read_root():
     return {"Hello": "World"}
 
+
 @app.get("/handshake/")
-def handshake():
-    pass
+def handshake(handshake: HandshakeIn):
+
+    return handshake
 
 
 

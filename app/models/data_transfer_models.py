@@ -2,8 +2,12 @@ from pydantic import BaseModel
 from typing import Optional, Union, List
 from datetime import datetime
 
+class HandshakeIn(BaseModel):
+    latitude: float
+    longitude: float
 
-class Handshake(BaseModel):
+
+class HandshakeOut(BaseModel):
     """ Defines the model for the initial exchange of information. """
     # NOTE: Handshake should be called every time the UI is refreshed."
 
