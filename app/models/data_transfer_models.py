@@ -2,9 +2,13 @@ from pydantic import BaseModel
 from typing import Optional, Union, List
 from datetime import datetime
 
+
 class HandshakeIn(BaseModel):
     latitude: float
     longitude: float
+
+    class Config:
+        orm_mode = True
 
 
 class HandshakeOut(BaseModel):
@@ -13,6 +17,9 @@ class HandshakeOut(BaseModel):
 
     user_id: int
     stories: list
+
+    class Config:
+        orm_mode = True
 
 
 class UserIn(BaseModel):
@@ -44,7 +51,7 @@ class StoryRecomendation(BaseModel):
 
 class PathIn(BaseModel):
     """ Defines the model for a path. """
-    path : List[dict]  # list of dicts with lat, long, timestamp
+    path: List[dict]  # list of dicts with lat, long, timestamp
 
 
 # todo: Maybe we don't need to send the UID every time? - start flag then assumes same story uid unless otherwise specified.
@@ -56,11 +63,13 @@ class VoiceIn(BaseModel):
     start: int
     end: int
 
+
 # Sending and receiving qudio
 class AudioFileRequestIN(BaseModel):
     """ Defines the model for a request for an audio file. """
     story_id: int
     timestamp: int
+
 
 class AudioFileRequestOUT(BaseModel):
     """ Defines the model for a request for an audio file. """

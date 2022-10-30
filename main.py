@@ -16,7 +16,7 @@ def read_root():
 
 @app.get("/handshake/")
 def handshake(handshake: HandshakeIn):
-
+    print(handshake)
     return handshake
 
 
