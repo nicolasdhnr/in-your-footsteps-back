@@ -2,6 +2,11 @@
 Defines all relevant API endpoints.
 """
 from fastapi import FastAPI
+import asyncio
+from app.models.db_models import User, Story, Path, Voice
+from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn
+
+
 
 app = FastAPI()
 
@@ -11,9 +16,18 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int):
-    return {"item_id": item_id}
+#sign up
+@app.post("/signup/")
+def signup(user: UserIn):
+    return user
+
+
+
+
+
+
+
+
 
 
 
