@@ -5,25 +5,22 @@ import json
 from datetime import date
 import os
 
-pwd = os.getenv('DB_PASS')
-user = os.getenv('DB_USER')
-ip = os.getenv('DB_IP')
-engine = sqlalchemy.create_engine(f'mysql+pymysql://root:{pwd}@{ip}')
+engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:inyourfootsteps@35.246.2.66')
 
 def send_to_db(table, json_file):
     data = json.load(json_file)
     for i in data:
         values = list(i.values())
         if table == 'authentication':
-            engine.execute(self.insert_auth(values))
+            return pd.read_sql(insert_auth(values), engine)
         elif table == 'profile':
-            engine.execute(self.insert_profile(values))
+            return pd.read_sql(insert_profile(values), engine)
         elif table == 'story':
-            engine.execute(self.insert_story(values))
+            return pd.read_sql(insert_story(values), engine)
         elif table == 'path':
-            engine.execute(self.insert_path(values))
+            return pd.read_sql(insert_path(values), engine)
         elif table == 'voice':
-            engine.execute(self.insert_voice(values))
+            return pd.read_sql(insert_voice(values), engine)
 
 def insert_auth(data):
     return f"INSERT INTO footsteps_db.authentication (userUID, identifier, provider, created, signed_in) VALUES({str(data[0])}, '{data[1]}', '{data[2]}', {str(data[3])}, {str(data[4])})"
