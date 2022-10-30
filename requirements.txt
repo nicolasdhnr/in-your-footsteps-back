@@ -4,6 +4,7 @@ gunicorn
 sqlalchemy
 requests
 pytest
+firebase-admin
 
 
 

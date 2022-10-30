@@ -10,16 +10,32 @@ app = FastAPI()
 
 
 @app.get("/")
-def read_root():
+async def read_root():
     return {"Hello": "World"}
+
+@app.get("/handshake/")
+async def handshake():
+    stories = await get_recommended_stories()
+
 
 
 # sign up
 @app.post("/signup/")
-def signup(user: UserIn):
+async def signup(user: UserIn):
     return user
 
 
 @app.get("/login/")
 def login():
     return {"login": "success"}
+
+
+@app.post("/story/")
+def create_story(story: StoryIn):
+    return story
+
+
+@app.post("/path/")
+def create_path(path: PathIn):
+    return path
+

@@ -37,7 +37,6 @@ class data_to_db():
     def insert_profile(self, data):
         return f"INSERT INTO footsteps_db.profile (user_id, userUID, username) VALUES ({str(data[0])}, {str(data[1])}, {data[2]})"
 
-<<<<<<< HEAD
     def insert_story(self, data):
         return f"INSERT INTO footsteps_db.story (story_id, user_id, title, ranking, theme) VALUES ({data})"
 
@@ -51,13 +50,3 @@ class data_to_db():
 db = data_to_db()
 with open('prod.json') as json_file:
     db.send_to_db('authentication', json_file)
-=======
-    def insert_story(self,data):
-        return f"INSERT INTO footsteps_db.story (story_id, user_id, title, ranking, theme) VALUES ({str(data[0])}, {str(data[1])}, '{data[2]}', '{data[3]}', '{data[4]}')"
-
-    def insert_path(self,data):
-        return f"INSERT INTO footsteps_data.path (path_id, story_id, latitude, longitude, timestamp) VALUES ({str(data[0])}, {str(data[1])}, {str(data[2])}, {str(data[3])}, {str(data[4])})"
-
-    def insert_voice(self,data):
-        return f"INSERT INTO footsteps_data.voice(voice_id, story_id, order, text, start, end) VALUES ({str(data[0])}, {str(data[1])}, {str(data[2])}, '{data[3]}', {str(data[4])}, {str(data[5])})"
->>>>>>> de8beb04be3261baea5396479a3346fb276aef75
