@@ -6,8 +6,6 @@ import asyncio
 from app.models.db_models import User, Story, Path, Voice
 from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn
 
-
-
 app = FastAPI()
 
 
@@ -16,22 +14,12 @@ def read_root():
     return {"Hello": "World"}
 
 
-#sign up
+# sign up
 @app.post("/signup/")
 def signup(user: UserIn):
     return user
 
+
 @app.get("/login/")
-def login(user: UserIn):
+def login():
     return {"login": "success"}
-
-
-
-
-
-
-
-
-
-
-
