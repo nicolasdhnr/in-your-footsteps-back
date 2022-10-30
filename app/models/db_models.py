@@ -7,6 +7,7 @@ These models are used to validate the data that is sent to the API.
 
 from typing import Optional
 from pydantic import BaseModel
+from typing import Optional, Union, List
 
 
 class User(BaseModel):
@@ -23,9 +24,14 @@ class Story(BaseModel):
     """ Defines the model for a story. """
     story_id: int
     user_id: int
-    title: str
     ranking: int
+    title: str
     theme: str
+    path_id: int
+    startlat: float  # used to show starting point on map
+    startlng: float
+    themes: List[str] # populated using the themes table
+
 
     class Config:
         orm_mode = True
@@ -54,7 +60,3 @@ class Voice(BaseModel):
 
     class Config:
         orm_mode = True
-
-
-
-

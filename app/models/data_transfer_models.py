@@ -11,15 +11,6 @@ class HandshakeIn(BaseModel):
         orm_mode = True
 
 
-class HandshakeOut(BaseModel):
-    """ Defines the model for the initial exchange of information. """
-    # NOTE: Handshake should be called every time the UI is refreshed."
-
-    user_id: int
-    stories: list
-
-    class Config:
-        orm_mode = True
 
 
 class UserIn(BaseModel):
@@ -34,6 +25,17 @@ class StoryIn(BaseModel):
     title: str
     ranking: int
     theme: str
+
+
+class HandshakeOut(BaseModel):
+    """ Defines the model for the initial exchange of information. """
+    # NOTE: Handshake should be called every time the UI is refreshed."
+
+    stories: List[Union[StoryIn, None]]
+
+    class Config:
+        orm_mode = True
+
 
 
 class StoryOut(BaseModel):
