@@ -7,7 +7,6 @@ import os
 import pandas as pd
 from app.models.data_transfer_models import Story
 from app.models.data_transfer_models import HandshakeOut, HandshakeIn, StoryIn, StoryOut, Recording, StoryStartOut
-from tabulate import tabulate
 
 engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:inyourfootsteps@35.246.2.66')
 conn = engine.connect()
@@ -16,7 +15,6 @@ conn = engine.connect()
 def get_nearest(lat, lng):
     query = f"SELECT *, SQRT(POW(69.1 * (startlat - {lat}), 2) + POW(69.1 * ({lng} - startlng) * COS(startlat / 57.3), 2)) AS distance  FROM `footsteps_db`.`story` ORDER BY likes ASC LIMIT 0, 30;"
     df = pd.read_sql(query, engine)
-    print(tabulate(df, headers='keys', tablefmt='psql'))
     df.columns = ['story_id', 'story_user_id', "likes", 'title', 'theme', 'startlat', 'startlng', 'endlat',
                   'endlng', "description", 'distance']
     # parse df into a list of StoryIn Objects
