@@ -51,3 +51,15 @@ class VoiceIn(BaseModel):
     text: str
     start: int
     end: int
+
+# Sending and receiving qudio
+class AudioFileRequestIN(BaseModel):
+    """ Defines the model for a request for an audio file. """
+    story_id: int
+    timestamp: int
+
+class AudioFileRequestOUT(BaseModel):
+    """ Defines the model for a request for an audio file. """
+    story_id: int
+    timestamp: int
+    audio_file_link: str

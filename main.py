@@ -5,7 +5,7 @@ from fastapi import FastAPI
 import asyncio
 from app.models.db_models import User, Story, Path, Voice
 from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn
-
+from app.db.manipulation import data_to_db
 app = FastAPI()
 
 
@@ -15,7 +15,7 @@ async def read_root():
 
 @app.get("/handshake/")
 async def handshake():
-    stories = await get_recommended_stories()
+    pass
 
 
 
@@ -38,4 +38,10 @@ def create_story(story: StoryIn):
 @app.post("/path/")
 def create_path(path: PathIn):
     return path
+
+#testing firestore connection
+@app.get("/firestore/")
+def get_path_data():
+
+
 
