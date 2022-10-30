@@ -21,6 +21,9 @@ def read_root():
 def signup(user: UserIn):
     return user
 
+@app.get("/login/")
+def login(user: UserIn):
+    return {"login": "success"}
 
 
 
