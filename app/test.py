@@ -6,7 +6,7 @@ Test heroku api endpoints.
 import requests
 import json
 import pytest
-from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn
+from app.models.data_transfer_models import UserIn, StoryIn, StoryIn
 
 heroku_url = "https://in-your-footsteps.herokuapp.com/"
 

@@ -4,10 +4,15 @@ Defines all relevant API endpoints.
 from fastapi import FastAPI
 import asyncio
 from app.models.db_models import User, Story, Path, Voice
-from app.models.data_transfer_models import UserIn, StoryIn, PathIn, VoiceIn, HandshakeIn, HandshakeOut
+from app.models.data_transfer_models import UserIn, StoryIn, StoryIn, StoryStartIn, HandshakeIn, HandshakeOut, \
+    StoryStartOut, Recording
 from app.db.manipulation import data_to_db
+
 from fastapi.middleware.cors import CORSMiddleware
 import json
+
+from typing import List, Union
+
 app = FastAPI()
 
 origins = ["*"]
@@ -27,35 +32,75 @@ def read_root():
 
 
 @app.get("/handshake/")
-async def handshake(handshake: HandshakeIn) -> HandshakeOut:
-    story_1 = StoryIn(user_id=1, title="test", ranking=1, theme="test")
-    story_2 = StoryIn(user_id=2, title="test", ranking=2, theme="test")
-    story_3 = StoryIn(user_id=3, title="test", ranking=3, theme="test")
-    story_4 = StoryIn(user_id=4, title="test", ranking=4, theme="test")
-    story_5 = StoryIn(user_id=5, title="test", ranking=5, theme="test")
+async def handshake(handshake: HandshakeIn) -> dict:
+    # get handshake data from db
+    # return handshake data
+
     handshake_out = HandshakeOut(stories=[story_1, story_2, story_3, story_4, story_5])
     return handshake_out.dict()
 
 
-# sign up
-@app.post("/signup/")
-def signup(user: UserIn):
-    return user
+# User wants to like a story.
+@app.post("/like/")
+async def like(story_id: int) -> dict:
+    # increment story ranking in db based
+
+    return {f"Story {story_id}": "liked"}
 
 
-@app.get("/login/")
-def login():
-    return {"login": "success"}
+@app.post("/unlike/")
+async def unlike(story_id: int) -> dict:
+    # decrement story ranking in db based
+
+    return {f"Story {story_id}": "unliked"}
 
 
-@app.post("/story/")
-def create_story(story: StoryIn):
-    return story
+# User finishes recording a story
+@app.post("/log_path/")
+async def log_story(story: StoryIn):
+    """
+    Register a new story.
+    """
+    # log path to db
+    # write data to db
+
+    return {f"path {story.storyID}": "logged"}
 
 
-@app.post("/path/")
-def create_path(path: PathIn):
-    return path
+# User presses the confirm story button and starts following a path
+@app.post("/confirm_story/")
+async def confirm_story(story: StoryStartIn) -> dict:
+    """
+    Register a new story.
+    :param path:
+    :return:
+    """
+    # receive the story id
+    # get every recordg associated with the story id in the database
+    # return the recordings to the front end
+    recording_1 = Recording(voice_id=1, start_lat=1.1, start_lng=1.1)
+    recording_2 = Recording(voice_id=2, start_lat=2.2, start_lng=2.2)
+    recording_3 = Recording(voice_id=3, start_lat=3.3, start_lng=3.3)
+    recording_4 = Recording(voice_id=4, start_lat=4.4, start_lng=4.4)
+
+    story_out = StoryStartOut(story_id=1, user_id=1, ranking=1, title="test", theme="test", startlat=1.1, startlng=1.1,
+                              path_id=1)
+    return story_out.dict()
+
+
+@app.get("/seach/")
+async def search(title: str) -> List[Story]:
+    # search db by title
+    # return list of stories
+
+    return  # FILL
+
+
+app.get("/filter/{theme}")
+async def filter(theme: str) -> List[Story]:
+    # search db by theme
+    # return list of stories
+    return  # FILL
 
 
 # testing firestore connection

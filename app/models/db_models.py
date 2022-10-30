@@ -23,15 +23,16 @@ class User(BaseModel):
 class Story(BaseModel):
     """ Defines the model for a story. """
     story_id: int
-    user_id: int
-    ranking: int
+    story_user_id: int # ID of the person that posted the story
+    likes: int
     title: str
     theme: str
-    path_id: int
     startlat: float  # used to show starting point on map
     startlng: float
-    themes: List[str] # populated using the themes table
-
+    themes: List[str]  # 5 themes per story  #TODO: Make function that gets all themes for a story_id
+    endlat: Optional[float] = None  # used to show starting point on map
+    endlng: Optional[float] = None
+    description: Optional[str] = None
 
     class Config:
         orm_mode = True

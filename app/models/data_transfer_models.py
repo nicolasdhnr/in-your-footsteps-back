@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, Union, List
 from datetime import datetime
+from app.models.db_models import User, Story, Path, Voice
 
 
 class HandshakeIn(BaseModel):
@@ -11,31 +12,10 @@ class HandshakeIn(BaseModel):
         orm_mode = True
 
 
-
-
 class UserIn(BaseModel):
     """ Defines the model for a user. """
     userUID: int
     username: str
-
-
-class StoryIn(BaseModel):
-    """ Defines the model for a story. """
-    user_id: int
-    title: str
-    ranking: int
-    theme: str
-
-
-class HandshakeOut(BaseModel):
-    """ Defines the model for the initial exchange of information. """
-    # NOTE: Handshake should be called every time the UI is refreshed."
-
-    stories: List[Union[StoryIn, None]]
-
-    class Config:
-        orm_mode = True
-
 
 
 class StoryOut(BaseModel):
@@ -48,33 +28,40 @@ class StoryOut(BaseModel):
 
 class StoryRecomendation(BaseModel):
     """ Defines the model for the story recommendations. """
-    story_list: Union[List[StoryOut], None]  # Pass the top 50 recommendations
+    story_list: Union[List[Story], None]  # Pass the top 50 recommendations
 
 
-class PathIn(BaseModel):
-    """ Defines the model for a path. """
-    path: List[dict]  # list of dicts with lat, long, timestamp
+class StoryIn(BaseModel):
+    """ New Story registration. """
+    storyID: str
+    start_latitude: float
+    start_longitude: float
 
 
 # todo: Maybe we don't need to send the UID every time? - start flag then assumes same story uid unless otherwise specified.
-class VoiceIn(BaseModel):
-    """ Defines the model for a voice. """
+# Hanshake Stuff
+class HandshakeOut(BaseModel):
+    """ Defines the model for the initial exchange of information. """
+    # NOTE: Handshake should be called every time the UI is refreshed."
+    stories: List[Union[StoryIn, None]]
+
+    class Config:
+        orm_mode = True
+
+
+# ============  Sending and receiving audio ============
+class StoryStartIn(BaseModel):
+    """ Story Start. """
     story_id: int
-    order: int
-    text: str
-    start: int
-    end: int
 
 
-# Sending and receiving qudio
-class AudioFileRequestIN(BaseModel):
+class Recording(BaseModel):
+    """ Defines the model for a recording. """
+    recording_id: int
+    startlat: int
+    endlat: Optional[int] = None
+
+
+class StoryStartOut(BaseModel):
     """ Defines the model for a request for an audio file. """
-    story_id: int
-    timestamp: int
-
-
-class AudioFileRequestOUT(BaseModel):
-    """ Defines the model for a request for an audio file. """
-    story_id: int
-    timestamp: int
-    audio_file_link: str
+    recordings: List[Recording]
